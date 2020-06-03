@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pokemon: The Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+  <center>
+
+<style>
+
+
+.pokemonImg {
+  width: 150px;
+  height: 150px;
+}
+
+</style>
+  <script type="text/javascript">
+
+    function congratulationsStarter() {
+
+      var welcome = document.getElementById("starters").value;
+      var res;
+      var printPokemonStats;
+      var print5;
+      var print6;
+      var print7;
+      var print8;
+
+      if (welcome == 'squirtle') {
+          res = ('You picked Squirtle! Epic decision!');
+          pokemonStats.moves = ('Water Blast');
+          pokemonStats.pokemon = ('Squirtle');
+          printPokemonStats = pokemonStats;
+          party = pokemonStats.party();
+          print5 = pokemonStats.pokemon;
+          print6 = "https://cdn.bulbagarden.net/upload/3/39/007Squirtle.png";
+          print7 = pokemonStats.health;
+          print8 = pokemonStats.dmg;
+      } else if (welcome == 'bulbasaur') {
+          res = ('You picked Bulbasaur! Nice choice!');
+          pokemonStats.moves = ('Grass Whip');
+          pokemonStats.pokemon = ('Bulbasaur');
+          party = pokemonStats.pokemon;
+          printPokemonStats = pokemonStats;
+          print5 = pokemonStats.pokemon;
+          print6 = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png";
+          print7 = pokemonStats.health;
+          print8 = pokemonStats.dmg;
+      } else if (welcome == 'charmander') {
+          res = ('You picked charmander! Excellent!');
+          pokemonStats.pokemon = ('Charmander');
+          pokemonStats.moves = ('Fire Breath');
+          printPokemonStats = pokemonStats;
+          party = pokemonStats.pokemon;
+          print5 = pokemonStats.pokemon;
+          print6 = "https://cdn.bulbagarden.net/upload/7/73/004Charmander.png";
+          print7 = pokemonStats.health;
+          print8 = pokemonStats.dmg;
+      }
+      document.getElementById("exampleText").innerHTML = res;
+      document.getElementById("pokemonStats").innerHTML = pokemonStats.allStats();
+      document.getElementById("pokeParty").innerHTML = party;
+      document.getElementById("table5").innerHTML = print5;
+      document.getElementById("table6").src = print6;
+      document.getElementById("table7").innerHTML = print7;
+      document.getElementById("table8").innerHTML = print8;
+      }
+
+
+      const pokemonStats = {
+        pokemon: ('fill here'),
+        party: function party() {
+          return (this.pokemon + this.newPokemon)
+        },
+        newPokemon: '' ,
+        level: 1,
+        health: 20,
+        dmg: 5,
+        moves: ('fill here'),
+        allStats: function allStats() {
+            return ( ' Pokemon: ' + this.pokemon + ' ||| Level: ' + this.level + ' ||| Moves: ' + this.moves + ' ||| Health: ' + this.health);
+        }
+      }
+
+      function encounterPokemon() {
+
+        var pokemon = [["Pidgey", "Diglit", "Ditto", "Caterpie", "Paras", "Ratata", "Tentacool"],  // 0 bad
+                       ["Delibird", "Smeargle", "SudoWoodo"],  // 1 medium
+                       ["Dreepy"]  // 2 good
+                       ];
+
+        var print;
+
+        var getRarity = Math.floor(Math.random()*10);
+        var chooseFrom;
+        if (getRarity <= 5) {
+          chooseFrom = 0;
+        }
+        else if (getRarity <= 8) {
+          chooseFrom = 1;
+        } else {
+          chooseFrom = 2;
+        }
+        var party;
+        var choosePoke = Math.floor(Math.random()*pokemon[chooseFrom].length);
+        var usrEncounter = prompt(`You encountered a wild ${pokemon[chooseFrom][choosePoke]}! Do you wish to fight/catch or run from it?`);
+        if (usrEncounter == 'fight') {
+            print = (`You defeated the wild ${pokemon[chooseFrom][choosePoke]}! You leveled up!`);
+            pokemonStats.level += 1;
+            document.getElementById("exampleText2").innerHTML = print;
+            document.getElementById("pokemonStats").innerHTML = pokemonStats.allStats();
+        } else if (usrEncounter == 'catch') {
+          var catchOdds = Math.floor(Math.random()*3);
+          if (catchOdds == 2) {
+            print = (`You caught a wild ${pokemon[chooseFrom][choosePoke]} . Nice Job!`);
+            pokemonStats.newPokemon += (' ||| ' + pokemon[chooseFrom][choosePoke]);
+            party = pokemonStats.party()
+          } else {
+            print = (`You didnt catch the wild ${pokemon[chooseFrom][choosePoke]} ! Better luck next time!`);
+            party = pokemonStats.party()
+          }
+          document.getElementById("exampleText2").innerHTML = print;
+          document.getElementById("pokeParty").innerHTML = party;
+          }
+      }
+
+  function evoButton() {
+
+    var askUser = prompt('Do you wish to evolve your pokemon?');
+        if (pokemonStats.level < 10) {
+        print = ('Sorry, You are not a high enough level!')
+        } else if (askUser == 'yes') {
+        if (pokemonStats.pokemon == 'Bulbasaur') {
+          pokemonStats.pokemon = 'Ivysaur';
+          pokemonStats.health = 25;
+        } else if (pokemonStats.pokemon == 'Squirtle') {
+          pokemonStats.pokemon = 'Wartortle';
+          pokemonStats.health = 25;
+        } else if (pokemonStats.pokemon == 'Charmander') {
+          pokemonStats.pokemon = 'Charmeleon';
+          pokemonStats.health = 25;
+        }
+      } else {
+        print = ('Have a good day')
+      }
+      document.getElementById("exampleText").innerHTML = print;
+      document.getElementById("pokemonStats").innerHTML = pokemonStats.allStats();
+      document.getElementById("table5").innerHTML = print5;
+      document.getElementById("table6").innerHTML = print6;
+      document.getElementById("table7").innerHTML = print7;
+      document.getElementById("table8").innerHTML = print8;
+  }
+
+  </script>
+  <body>
+  <h1 class="pokemonHeader"> Pokemon: The WebPage Video Game </h1>
+  <div>
+        <select id="starters">
+           <option value="squirtle">Squirtle</option>
+           <option value="bulbasaur">Bulbasaur</option>
+           <option value="charmander">Charmander</option>
+        </select>
+        <button class="button" onclick="congratulationsStarter()">Starter Button </button> <button class="evoButton" onClick="evoButton()"> Evolution Button </button>
+        <p id='exampleText'></p>
+        <p id='exampleText2'></p>
+        <h3>Pokemon Stats </h3>
+        <p id='pokemonStats'></p>
+        <h3> Pokemon Party </h3>
+        <p id='pokeParty'></p>
+  </div>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Combat </title>
+  </head>
+  <div>
+     <h1> Wild Pokemon Generator </h1>
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-4 col-sm-12">
+           <div class="row">
+             <div class="col-12">
+               <h3>Your Pokemon</h3>
+             </div>
+             <div class="col-12">
+               <h3>Name</h3>
+               <p id="table5"></p>
+             </div>
+             <div class="col-12">
+               <h3>Image</h3>
+                <img id="table6" class="pokemonImg" src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/symbol_questionmark.png">
+             </div>
+             <div class="col-12">
+               <h3>Health</h3>
+               <p id="table7"></p>
+             </div>
+             <div class="col-12">
+               <h3>Damage</h3>
+               <p id="table8"></p>
+             </div>
+           </div>
+
+           </div>
+           <div class="col-lg-4 col-sm-12">
+             <!-- button -->
+             <button class="generatorbutton" onclick="encounterPokemon()"> Generate </button>
+
+           </div>
+           <div class="col-lg-4 col-sm-12">
+             <!-- enemy pokemon -->
+             <div class="row">
+               <div class="col-12">
+                 <h3>Enemy Pokemon</h3>
+               </div>
+               <div class="col-12">
+                 <h3>Name</h3>
+                 <p id="table1"></p>
+               </div>
+               <div class="col-12">
+                 <h3>Image</h3>
+                 <img id="table2" class="pokemonImg" src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/symbol_questionmark.png">
+               </div>
+               <div class="col-12">
+                 <h3>Health</h3>
+                 <p id="table3"></p>
+               </div>
+               <div class="col-12">
+                 <h3>Damage</h3>
+                 <p id="table4"></p>
+               </div>
+             </div>
+
+           </div>
+
+         </div>
+
+       </div>
+
+     </div>
+
+     <p id="pleasework"></p>
+     <h4> State whether you wish to fight or catch this specific pokemon: </h4>
+     <select id="askuser">
+        <option value="fight">fight</option>
+        <option value="catch">catch</option>
+     </select>
+     <button onclick="askUserFight()" >Submit</button>
+     <p id="showHere"></p>
+
+      <script type="text/javascript">
+
+
+          const enemyPokemon = {
+            name: ('Fill here'),
+            health:('Fill here'),
+            damage: ('Fill here'),
+            allStats: function allStats() {
+              return (this.name + this.health + this.damage)
+            }
+          }
+
+
+function encounterPokemon() {
+
+   class makePoke {
+          constructor(name, ref, health, dmg) {
+            this.name = name;
+            this.ref = ref;
+            this.health = health;
+            this.dmg = dmg;
+          }
+        }
+
+        pidgey = new makePoke("Pidgey  ", "https://img.pokemondb.net/artwork/large/pidgey.jpg", 20, 5);
+        diglet = new makePoke("Diglet   ", "https://vignette.wikia.nocookie.net/sonicpokemon/images/b/bd/Diglett_AG_anime.png/revision/latest/scale-to-width-down/340?cb=20130619041245", 20, 5);
+        ditto = new makePoke("Ditto   ", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/132.png", 25, 2);
+        caterpie = new makePoke("Caterpie ", "https://static.pokemonpets.com/images/monsters-images-800-800/10-Caterpie.png", 10, 3);
+        paras = new makePoke("Paras    ", "https://img.pokemondb.net/artwork/large/paras.jpg", 15, 5);
+        ratata = new makePoke("Ratata   ", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/019.png", 20, 3);
+        tentacool = new makePoke("Tentacool", "https://vignette.wikia.nocookie.net/sonicpokemon/images/9/92/Tentacool_AG_anime.png/revision/latest?cb=20130703234723", 15, 3);
+        delibird = new makePoke("Delibird ", "https://img.pokemondb.net/artwork/large/delibird.jpg", 25, 5);
+        smeargle = new makePoke("Smeargle ", "https://img.pokemondb.net/artwork/large/smeargle.jpg", 20, 6);
+        oddish = new makePoke("Oddish", "https://img.pokemondb.net/artwork/large/oddish.jpg", 30, 4);
+        dreepy = new makePoke("Dreepy   ", "https://cdn.bulbagarden.net/upload/thumb/a/a9/885Dreepy.png/250px-885Dreepy.png", 40, 6);
+
+
+
+        var pokemon = [["Pidgey", "Diglit", "Ditto", "Caterpie", "Paras", "Ratata", "Tentacool"],  // 0 bad
+                       ["Delibird", "Smeargle", "Oddish"],  // 1 medium
+                       ["Dreepy"]  // 2 good
+                       ];
+
+        var print1;
+        var print2;
+        var print3;
+        var print4
+        var getRarity = Math.floor(Math.random()*10);
+        var chooseFrom;
+        if (getRarity <= 5) {
+          chooseFrom = 0;
+        }
+        else if (getRarity <= 8) {
+          chooseFrom = 1;
+        } else {
+          chooseFrom = 2;
+        }
+        var party;
+        var choosePoke = Math.floor(Math.random()*pokemon[chooseFrom].length);
+
+        if (pokemon[chooseFrom][choosePoke] === 'Pidgey') {
+          print1 = pidgey.name;
+          print2 = pidgey.ref;
+          print3 = pidgey.health;
+          print4 = pidgey.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Diglit') {
+          print1 = diglet.name;
+          print2 = diglet.ref;
+          print3 = diglet.health;
+          print4 = diglet.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Ditto') {
+          print1 = ditto.name;
+          print2 = ditto.ref;
+          print3 = ditto.health;
+          print4 = ditto.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Caterpie') {
+          print1 = caterpie.name;
+          print2 = caterpie.ref;
+          print3 = caterpie.health;
+          print4 = caterpie.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Paras') {
+          print1 = paras.name;
+          print2 = paras.ref;
+          print3 = paras.health;
+          print4 = paras.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Ratata') {
+          print1 = ratata.name;
+          print2 = ratata.ref;
+          print3 = ratata.health;
+          print4 = ratata.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Tentacool') {
+          print1 = tentacool.name;
+          print2 = tentacool.ref;
+          print3 = tentacool.health;
+          print4 = tentacool.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Delibird') {
+          print1 = delibird.name;
+          print2 = delibird.ref;
+          print3 = delibird.health;
+          print4 = delibird.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Smeargle') {
+          print1 = smeargle.name;
+          print2 = smeargle.ref;
+          print3 = smeargle.health;
+          print4 = smeargle.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Oddish') {
+          print1 = oddish.name;
+          print2 = oddish.ref;
+          print3 = oddish.health;
+          print4 = oddish.dmg;
+        } else if (pokemon[chooseFrom][choosePoke] === 'Dreepy') {
+          print1 = dreepy.name;
+          print2 = dreepy.ref;
+          print3 = dreepy.health;
+          print4 = dreepy.dmg;
+        }
+
+        document.getElementById("table1").innerHTML = print1;
+        document.getElementById("table2").src = print2;
+        document.getElementById("table3").innerHTML = print3;
+        document.getElementById("table4").innerHTML = print4;
+
+  }
+
+
+    function askUserFight(pokemon, chooseFrom, choosePoke) {
+
+
+
+      var pokemon = [["Pidgey", "Diglit", "Ditto", "Caterpie", "Paras", "Ratata", "Tentacool"],  // 0 bad
+                       ["Delibird", "Smeargle", "SudoWoodo"],  // 1 medium
+                       ["Dreepy"]  // 2 good
+                       ];
+
+
+        var getRarity = Math.floor(Math.random()*10);
+        var chooseFrom;
+        if (getRarity <= 5) {
+          chooseFrom = 0;
+        }
+        else if (getRarity <= 8) {
+          chooseFrom = 1;
+        } else {
+          chooseFrom = 2;
+        }
+
+        var choosePoke = Math.floor(Math.random()*pokemon[chooseFrom].length);
+
+      var userChoice = document.getElementById("askuser").value;
+      var response;
+      var response1;
+
+        if (userChoice == 'fight') {
+            print5 = pokemonStats.pokemon
+            print6 = pokemonStats
+            print7 = pokemonStats.health
+            print8 = pokemonStats.dmg
+
+        } else if (userChoice == 'catch') {
+
+            var catchOdds = Math.floor(Math.random()*3);
+
+            if (catchOdds === 1) {
+              response = (`You caught a wild ${pokemon[chooseFrom][choosePoke]}! Nice Job!`);
+              response1 += pokemon[chooseFrom][choosePoke]
+            }
+
+        }
+        document.getElementById("pokeParty").innerHTML = response1
+        document.getElementById("showHere").innerHTML = response;
+    }
+
+pokeParty
+
+    </script>
+   </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+https://teespring-storecontent.s3.amazonaws.com/-oWEewDfiErZACH7p3bSWA_store_banner_image?1476649917337
+// cool image i want to put into box //
+v -->
